@@ -10,7 +10,7 @@ export class ChatService {
 
   private http = inject(HttpClient);
 
-  sendMessage(message: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { message });
+  sendMessage(message: string): Observable<{ response: string }> {
+    return this.http.post<{ response: string }>(this.apiUrl, { message });
   }
 }

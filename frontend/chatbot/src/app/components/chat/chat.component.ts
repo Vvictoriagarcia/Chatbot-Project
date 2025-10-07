@@ -44,7 +44,6 @@ export class ChatComponent {
           this.messages.push({
             sender: 'bot',
             text: res.response,
-            matches: res.matches || [],
           });
         },
         error: () => {
