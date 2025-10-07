@@ -1,0 +1,48 @@
+<div class="title">
+  <h1>Chatbot Movie Recommendator</h1>
+</div>
+<div class="chat-container">
+  @for (msg of messages; track $index) {
+  <div
+    class="message"
+    [class.user]="msg.sender === 'user'"
+    [class.bot]="msg.sender === 'bot'"
+  >
+    <div class="bubble">
+      <strong>{{ msg.sender === "user" ? "You:" : "Bot:" }}</strong>
+      <span [innerHTML]="msg.text"></span>
+
+      @if (msg.matches?.length) {
+      <div class="matches">
+        <h4>🎬 Top Results:</h4>
+        <ul>
+          @for (m of msg.matches; track $index) {
+          <li>
+            <strong>Score:</strong> {{ m.score | number : "1.3-3" }}<br />
+            {{ m.text }}
+          </li>
+          }
+        </ul>
+      </div>
+      }
+    </div>
+  </div>
+  } @if (isLoading) {
+  <div class="loading">
+    <span class="dots"
+      >⏳ Generating answer<span class="dot1">.</span><span class="dot2">.</span
+      ><span class="dot3">.</span></span
+    >
+  </div>
+  }
+</div>
+
+<div class="input-area">
+  <input
+    [(ngModel)]="userMessage"
+    placeholder="Type your message..."
+    (keyup.enter)="sendMessage()"
+    [disabled]="isLoading"
+  />
+  <button (click)="sendMessage()" [disabled]="isLoading">Send</button>
+</div>
