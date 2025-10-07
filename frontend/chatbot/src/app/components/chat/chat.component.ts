@@ -50,7 +50,7 @@ export class ChatComponent {
         error: () => {
           this.messages.push({
             sender: 'bot',
-            text: '⚠️ Error: Unable to connect to the server.',
+            text: 'Error: Unable to connect to the server.',
           });
         },
       });
